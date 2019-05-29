@@ -1,9 +1,9 @@
 package com.example.josegarcia.todaymeal.views
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.model.Recipe
 import com.example.josegarcia.todaymeal.view_model.HomeViewModel

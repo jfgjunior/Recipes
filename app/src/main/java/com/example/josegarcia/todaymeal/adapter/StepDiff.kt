@@ -1,6 +1,6 @@
 package com.example.josegarcia.todaymeal.adapter
 
-import android.support.v7.util.DiffUtil
+import androidx.recyclerview.widget.DiffUtil
 
 import com.example.josegarcia.todaymeal.model.Step
 
