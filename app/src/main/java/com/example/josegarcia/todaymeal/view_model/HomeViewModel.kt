@@ -1,6 +1,6 @@
 package com.example.josegarcia.todaymeal.view_model
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 
 import com.example.josegarcia.todaymeal.model.Recipe
 

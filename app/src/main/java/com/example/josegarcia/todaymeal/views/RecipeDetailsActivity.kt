@@ -2,8 +2,8 @@ package com.example.josegarcia.todaymeal.views
 
 import android.graphics.Point
 import android.os.Bundle
-import android.support.design.widget.CoordinatorLayout
-import android.support.v7.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.appcompat.app.AppCompatActivity
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.helper.ImageCache
 import com.example.josegarcia.todaymeal.model.Recipe
