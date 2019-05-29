@@ -14,13 +14,12 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class RecipeListFragmentVM : ViewModel() {
-    private val recipes: MutableLiveData<List<Recipe>> = MutableLiveData()
-
+    private val recipes = MutableLiveData<List<Recipe>>()
     val recipesObservable: LiveData<List<Recipe>>
         get() = recipes
 
     fun getRecipes() {
-        if (recipes.value == null || recipes.value!!.isEmpty()) {
+        if (recipes.value == null || recipes.value?.isEmpty() == true) {
             fetchData()
         }
     }

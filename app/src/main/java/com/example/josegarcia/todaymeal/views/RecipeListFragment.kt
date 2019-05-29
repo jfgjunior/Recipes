@@ -53,7 +53,7 @@ class RecipeListFragment : Fragment(), SelectRecipe {
     private fun setUpRecyclerView() {
         progressBar.visibility = View.VISIBLE
         val adapter = RecipeListAdapter(this)
-        recyclerView!!.adapter = adapter
+        recyclerView.adapter = adapter
         observeData()
         verifyConnection()
     }
@@ -61,9 +61,9 @@ class RecipeListFragment : Fragment(), SelectRecipe {
     private fun observeData() {
         viewModel.recipesObservable
             .observe(this, Observer { recipes ->
-                (recyclerView!!.adapter as RecipeListAdapter).submitList(recipes)
-                progressBar!!.visibility = View.GONE
-                noConnectionMessage!!.visibility = View.GONE
+                (recyclerView.adapter as RecipeListAdapter).submitList(recipes)
+                progressBar.visibility = View.GONE
+                noConnectionMessage.visibility = View.GONE
             })
         viewModel.getRecipes()
     }
@@ -74,9 +74,9 @@ class RecipeListFragment : Fragment(), SelectRecipe {
         val isConnected =
             connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo.isConnected
         if (!isConnected) {
-            progressBar!!.visibility = View.GONE
-            if (recyclerView != null || recyclerView!!.adapter!!.itemCount == 0) {
-                noConnectionMessage!!.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+            if (recyclerView != null || recyclerView.adapter?.itemCount == 0) {
+                noConnectionMessage.visibility = View.VISIBLE
             } else {
                 noConnectionToast.cancel()
                 noConnectionToast.show()

@@ -5,10 +5,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.model.Ingredient
-import com.example.josegarcia.todaymeal.views.IngredientView
+import kotlinx.android.synthetic.main.ingredient_view_holder.view.ingredient_view as ingredientView
 
 class IngredientsListAdapter :
     ListAdapter<Ingredient, IngredientsListAdapter.IngredientViewHolder>(IngredientDiff()) {
@@ -23,10 +22,8 @@ class IngredientsListAdapter :
         ingredientViewHolder.bind(getItem(position))
 
     class IngredientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val ingredientView: IngredientView = itemView.findViewById(R.id.ingredient_view)
-
         fun bind(ingredient: Ingredient) {
-            ingredientView.createIngredients(ingredient)
+            itemView.ingredientView.createIngredients(ingredient)
         }
     }
 }

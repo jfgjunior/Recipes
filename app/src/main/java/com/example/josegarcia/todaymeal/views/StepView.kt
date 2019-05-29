@@ -15,7 +15,6 @@ import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import kotlinx.android.synthetic.main.view_step.view.long_description as longDescription
@@ -31,7 +30,6 @@ class StepView @JvmOverloads constructor(
     attrs: AttributeSet?,
     defStyleAttr: Int = 0
 ) : CardView(context, attrs, defStyleAttr) {
-    private var playerView: PlayerView? = null
     private var exoPlayer: SimpleExoPlayer? = null
     private lateinit var step: Step
 
@@ -60,29 +58,29 @@ class StepView @JvmOverloads constructor(
     private fun initializeViews() {
         val number = String.format("%d", step.number)
         stepNumberShort.text = number
-        shortDescription.text = step.shortDescription
         stepNumberLong.text = number
+        shortDescription.text = step.shortDescription
         longDescription.text = step.description
     }
 
     private fun initializePlayer() {
         val videoUrl = step.videoURL
         if (step.videoURL.isEmpty()) {
-            playerView!!.visibility = View.GONE
+            playerView.visibility = View.GONE
             return
         }
-        exoPlayer?.let {
+        if (exoPlayer == null) {
             exoPlayer = ExoPlayerFactory.newSimpleInstance(
                 context,
                 DefaultRenderersFactory(context),
                 DefaultTrackSelector(), DefaultLoadControl()
             )
 
-            playerView!!.player = exoPlayer
-            exoPlayer!!.playWhenReady = true
             val uri = Uri.parse(videoUrl)
             val mediaSource = buildMediaSource(uri)
-            exoPlayer!!.prepare(mediaSource, false, true)
+            playerView.player = exoPlayer
+            exoPlayer?.playWhenReady = true
+            exoPlayer?.prepare(mediaSource, false, true)
         }
     }
 
@@ -108,4 +106,3 @@ class StepView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 }
-

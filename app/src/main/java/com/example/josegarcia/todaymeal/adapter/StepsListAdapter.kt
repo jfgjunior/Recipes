@@ -5,10 +5,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.model.Step
-import com.example.josegarcia.todaymeal.views.StepView
+import kotlinx.android.synthetic.main.step_view_holder.view.step_view as stepView
 
 class StepsListAdapter : ListAdapter<Step, StepsListAdapter.StepViewHolder>(StepDiff()) {
 
@@ -24,10 +23,8 @@ class StepsListAdapter : ListAdapter<Step, StepsListAdapter.StepViewHolder>(Step
     }
 
     class StepViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val stepView: StepView = itemView.findViewById(R.id.step_view)
-
         fun bind(step: Step) {
-            stepView.setStep(step)
+            itemView.stepView.setStep(step)
         }
     }
 }

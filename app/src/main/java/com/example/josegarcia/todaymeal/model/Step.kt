@@ -34,12 +34,11 @@ class Step : Parcelable {
         if (other !is Step) {
             return false
         }
-        val step = other as Step?
-        return id == step!!.id &&
-                shortDescription == step.shortDescription &&
-                description == step.description &&
-                videoURL == step.videoURL &&
-                thumbnailURL == step.thumbnailURL
+        return id == other.id &&
+                shortDescription == other.shortDescription &&
+                description == other.description &&
+                videoURL == other.videoURL &&
+                thumbnailURL == other.thumbnailURL
     }
 
     override fun hashCode() = id

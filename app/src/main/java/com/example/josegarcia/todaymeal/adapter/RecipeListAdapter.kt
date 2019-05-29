@@ -6,14 +6,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.helper.ImageCache
 import com.example.josegarcia.todaymeal.model.Recipe
 import com.example.josegarcia.todaymeal.views.SelectRecipe
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.recipe_card.view.recipe_image as recipeImage
+import kotlinx.android.synthetic.main.recipe_card.view.recipe_name as recipeName
 
 class RecipeListAdapter(private val onSelectRecipeListener: SelectRecipe) :
     ListAdapter<Recipe, RecipeListAdapter.RecipeViewHolder>(RecipeDifferCallback()) {
@@ -29,30 +29,28 @@ class RecipeListAdapter(private val onSelectRecipeListener: SelectRecipe) :
 
     class RecipeViewHolder(itemView: View, private val onSelectRecipeListener: SelectRecipe) :
         RecyclerView.ViewHolder(itemView) {
-        private val foodPicture = itemView.findViewById<ImageView>(R.id.food_image)
-        private val foodName = itemView.findViewById<TextView>(R.id.recipe_name)
 
         fun bind(recipe: Recipe) {
             loadImage(recipe)
             setClickListener(recipe)
-            foodName.text = recipe.name
+            itemView.recipeName.text = recipe.name
         }
 
         private fun loadImage(recipe: Recipe) {
             if (recipe.image.isEmpty()) {
-                foodPicture.setImageResource(R.drawable.cooking_table)
+                itemView.recipeImage.setImageResource(R.drawable.cooking_table)
             } else {
                 Picasso.get()
                     .load(recipe.image)
                     .placeholder(R.drawable.loading_image_animation)
-                    .into(foodPicture)
+                    .into(itemView.recipeImage)
             }
         }
 
         private fun setClickListener(recipe: Recipe) {
             itemView.setOnClickListener {
                 if (recipe.image.isNotEmpty()) {
-                    ImageCache.bitmap = (foodPicture.drawable as BitmapDrawable)
+                    ImageCache.bitmap = (itemView.recipeImage.drawable as BitmapDrawable)
                         .bitmap
                 }
                 onSelectRecipeListener.onSelectRecipeListener(recipe)

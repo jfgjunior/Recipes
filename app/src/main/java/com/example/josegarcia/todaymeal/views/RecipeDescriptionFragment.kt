@@ -62,7 +62,7 @@ class RecipeDescriptionFragment : Fragment() {
 
     private fun setUpStepsContainer(steps: List<Step>) {
         val adapter = StepsListAdapter()
-        stepsContainer!!.adapter = adapter
+        stepsContainer.adapter = adapter
         adapter.submitList(steps)
     }
 }

@@ -50,16 +50,15 @@ class Recipe : Parcelable {
         this.servings = servings
     }
 
-    override fun equals(obj: Any?): Boolean {
-        if (this === obj) return true
-        if (obj !is Recipe) return false
-        val recipe = obj as Recipe?
-        return getId() == recipe!!.getId() &&
-                getServings() == recipe.getServings() &&
-                name == recipe.name &&
-                ingredients == recipe.ingredients &&
-                steps == recipe.steps &&
-                image == recipe.image
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Recipe) return false
+        return getId() == other.getId() &&
+                getServings() == other.getServings() &&
+                name == other.name &&
+                ingredients == other.ingredients &&
+                steps == other.steps &&
+                image == other.image
     }
 
     override fun hashCode(): Int {

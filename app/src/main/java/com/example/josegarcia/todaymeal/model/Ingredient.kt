@@ -26,15 +26,14 @@ class Ingredient : Parcelable {
         name = `in`.readString()
     }
 
-    override fun equals(obj: Any?): Boolean {
-        if (this === obj) return true
-        if (obj !is Ingredient) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Ingredient) {
             return false
         }
-        val ingredient = obj as Ingredient?
-        return quantity == ingredient!!.quantity &&
-                measure == ingredient.measure &&
-                name == ingredient.name
+        return quantity == other.quantity &&
+                measure == other.measure &&
+                name == other.name
     }
 
     override fun hashCode() = Objects.hash(quantity, measure, name)
