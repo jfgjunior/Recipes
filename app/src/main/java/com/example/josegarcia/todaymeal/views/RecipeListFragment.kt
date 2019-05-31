@@ -1,37 +1,36 @@
 package com.example.josegarcia.todaymeal.views
 
 import android.annotation.SuppressLint
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.adapter.RecipeListAdapter
-import com.example.josegarcia.todaymeal.model.Recipe
 import com.example.josegarcia.todaymeal.view_model.RecipeListFragmentVM
+import kotlinx.android.synthetic.main.fragment_recipe_list.*
 import kotlinx.android.synthetic.main.fragment_recipe_list.no_connection as noConnectionMessage
 import kotlinx.android.synthetic.main.fragment_recipe_list.progress_bar as progressBar
 import kotlinx.android.synthetic.main.fragment_recipe_list.recipe_list as recyclerView
 
 @SuppressLint("ShowToast")
-class RecipeListFragment : Fragment(), SelectRecipe {
+class RecipeListFragment : Fragment() {
+
     private val viewModel: RecipeListFragmentVM by lazy {
         ViewModelProviders.of(this).get(RecipeListFragmentVM::class.java)
     }
-    
+
     private val noConnectionToast: Toast by lazy {
         val message = requireContext().resources.getString(R.string.no_connection)
         Toast.makeText(context, message, Toast.LENGTH_SHORT)
-    }
-
-    companion object {
-        const val RECIPE_KEY = "recipe_key"
     }
 
     override fun onCreateView(
@@ -43,17 +42,13 @@ class RecipeListFragment : Fragment(), SelectRecipe {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toolbar.setupWithNavController(findNavController())
         setUpRecyclerView()
-    }
-
-    override fun onSelectRecipeListener(recipe: Recipe) {
-        (activity as HomeActivity).onSelectRecipeListener(recipe)
     }
 
     private fun setUpRecyclerView() {
         progressBar.visibility = View.VISIBLE
-        val adapter = RecipeListAdapter(this)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = RecipeListAdapter()
         observeData()
         verifyConnection()
     }

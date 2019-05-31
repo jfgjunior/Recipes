@@ -1,4 +1,4 @@
-package com.example.josegarcia.todaymeal.views
+package com.example.josegarcia.todaymeal.custom_views
 
 import android.content.Context
 import androidx.cardview.widget.CardView
@@ -14,24 +14,23 @@ class IngredientView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : CardView(context, attrs, defStyleAttr) {
-
-    fun createIngredients(ingredient: Ingredient) = setParameters(ingredient)
+) : CardView(context, attrs, defStyleAttr), IngredientContract.View {
+    private val presenter: IngredientContract.Presenter = IngredientPresenter(this)
+    var ingredient: Ingredient? = null
+        set(value) {
+            value?.let {
+                presenter.setIngredient(value)
+            }
+        }
 
     init {
         LayoutInflater.from(context)
             .inflate(R.layout.view_ingredient, this, true)
     }
 
-    private fun setParameters(ingredient: Ingredient) {
-        quantity.text = ingredient.quantity.toString()
-        itemName.text = ingredient.name
-        measureImage.setImageResource(getMeasureImage(ingredient.measure))
+    override fun setParameters() {
+        quantity.text = presenter.quantity
+        itemName.text = presenter.name
+        measureImage.setImageResource(presenter.getMeasureImage())
     }
-
-    private fun getMeasureImage(measure: String) = R.drawable.ic_noun_one_tablespoon_111987
-        //TODO: Return more images related to measure
-        //when (measure) {
-        //    else -> R.drawable.ic_noun_one_tablespoon_111987
-        //}
 }

@@ -22,7 +22,7 @@ class IngredientsDelegateAdapter : ViewTypeDelegateAdapter {
 
     class IngredientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(ingredient: Ingredient) {
-            itemView.ingredientView.createIngredients(ingredient)
+            itemView.ingredientView.ingredient = ingredient
         }
     }
 }
