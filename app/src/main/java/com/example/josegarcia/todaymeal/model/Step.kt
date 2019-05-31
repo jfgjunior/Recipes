@@ -13,7 +13,13 @@ class Step : Parcelable {
     val number: Int
         get() = id + 1
 
-    constructor(id: Int, shortDescription: String, longDescription: String, videoUrl: String, thumbnailURL: String) {
+    constructor(
+        id: Int,
+        shortDescription: String,
+        longDescription: String,
+        videoUrl: String,
+        thumbnailURL: String
+    ) {
         this.id = id
         this.shortDescription = shortDescription
         this.description = longDescription

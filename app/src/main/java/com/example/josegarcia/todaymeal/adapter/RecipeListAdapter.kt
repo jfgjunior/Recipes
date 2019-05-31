@@ -1,12 +1,11 @@
 package com.example.josegarcia.todaymeal.adapter
 
 import android.graphics.drawable.BitmapDrawable
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.helper.ImageCache
 import com.example.josegarcia.todaymeal.model.Recipe
