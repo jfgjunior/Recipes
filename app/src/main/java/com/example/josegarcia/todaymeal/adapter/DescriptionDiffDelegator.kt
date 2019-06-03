@@ -16,7 +16,7 @@ class DescriptionDiffDelegator : DiffUtil.ItemCallback<Any>() {
         return when (oldItem) {
             is Ingredient -> ingredientDiff.areItemsTheSame(oldItem, newItem as Ingredient)
             is Step -> stepDiff.areItemsTheSame(oldItem, newItem as Step)
-            is String -> titleDiff.areItemsTheSame(oldItem, newItem as String)
+            is Int -> titleDiff.areItemsTheSame(oldItem, newItem as Int)
             else -> throw ClassNotFoundException()
         }
     }
@@ -28,7 +28,7 @@ class DescriptionDiffDelegator : DiffUtil.ItemCallback<Any>() {
         return when (oldItem) {
             is Ingredient -> ingredientDiff.areContentsTheSame(oldItem, newItem as Ingredient)
             is Step -> stepDiff.areContentsTheSame(oldItem, newItem as Step)
-            is String -> titleDiff.areContentsTheSame(oldItem, newItem as String)
+            is Int -> titleDiff.areContentsTheSame(oldItem, newItem as Int)
             else -> throw ClassNotFoundException()
         }
     }

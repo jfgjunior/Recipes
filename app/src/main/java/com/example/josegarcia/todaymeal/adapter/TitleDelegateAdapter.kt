@@ -14,14 +14,14 @@ class TitleDelegateAdapter : ViewTypeDelegateAdapter {
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, model: Any) {
-        (viewHolder as TitleViewHolder).bind(model as String)
+        (viewHolder as TitleViewHolder).bind(model as Int)
     }
 
     override fun getLayoutId() = R.layout.item_title
 
     class TitleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(text: String) {
-            itemView.title.text = text
+        fun bind(textId: Int) {
+            itemView.title.text = itemView.context.resources.getString(textId)
         }
     }
 }

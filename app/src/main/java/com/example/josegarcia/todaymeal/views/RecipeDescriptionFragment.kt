@@ -38,8 +38,9 @@ class RecipeDescriptionFragment : Fragment() {
     }
 
     private fun populateLayout(recipe: Recipe) {
-
-        recipeDescription.adapter = DescriptionAdapter(recipe.ingredients, recipe.steps)
+        val adapter = DescriptionAdapter()
+        adapter.submit(recipe.ingredients, recipe.steps)
+        recipeDescription.adapter = adapter
     }
 
     private fun organizeIngredients(ingredients: MutableList<Ingredient>) {
