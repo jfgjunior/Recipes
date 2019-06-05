@@ -1,11 +1,11 @@
-package com.example.josegarcia.todaymeal.views
+package com.example.josegarcia.todaymeal.custom_views
 
 import android.content.Context
 import android.net.Uri
-import androidx.cardview.widget.CardView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import androidx.cardview.widget.CardView
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.model.Step
 import com.google.android.exoplayer2.DefaultLoadControl
@@ -29,62 +29,65 @@ class StepView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet?,
     defStyleAttr: Int = 0
-) : CardView(context, attrs, defStyleAttr) {
+) : CardView(context, attrs, defStyleAttr), StepContract.View {
     private var exoPlayer: SimpleExoPlayer? = null
-    private lateinit var step: Step
+    private val presenter: StepContract.Presenter = StepPresenter(this)
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_step, this, true)
-        setOnClickListener { this@StepView.onClick() }
+        setOnClickListener {
+            presenter.handleClick(
+                presenter.isShortDescriptionVisible(
+                    shortDescriptionLayout.visibility
+                )
+            )
+        }
     }
 
     fun setStep(step: Step) {
-        this.step = step
-        initializeViews()
+        presenter.setStep(step)
     }
 
-    private fun onClick() {
-        if (shortDescriptionLayout.visibility == View.GONE) {
-            shortDescriptionLayout.visibility = View.VISIBLE
-            longDescriptionLayout.visibility = View.GONE
-            stopPlayer()
-        } else {
-            shortDescriptionLayout.visibility = View.GONE
-            longDescriptionLayout.visibility = View.VISIBLE
-            initializePlayer()
-        }
+    override fun expandStep() {
+        shortDescriptionLayout.visibility = View.GONE
+        longDescriptionLayout.visibility = View.VISIBLE
+        presenter.initializePlayer(exoPlayer)
     }
 
-    private fun initializeViews() {
-        val number = String.format("%d", step.number)
-        stepNumberShort.text = number
-        stepNumberLong.text = number
-        shortDescription.text = step.shortDescription
-        longDescription.text = step.description
+    override fun contractStep() {
+        shortDescriptionLayout.visibility = View.VISIBLE
+        longDescriptionLayout.visibility = View.GONE
+        stopPlayer()
     }
 
-    private fun initializePlayer() {
-        val videoUrl = step.videoURL
-        if (step.videoURL.isEmpty()) {
-            playerView.visibility = View.GONE
-            return
-        }
-        if (exoPlayer == null) {
-            exoPlayer = ExoPlayerFactory.newSimpleInstance(
-                context,
-                DefaultRenderersFactory(context),
-                DefaultTrackSelector(), DefaultLoadControl()
-            )
-
-            val uri = Uri.parse(videoUrl)
-            val mediaSource = buildMediaSource(uri)
-            playerView.player = exoPlayer
-            exoPlayer?.playWhenReady = true
-            exoPlayer?.prepare(mediaSource, false, true)
-        }
+    override fun startPlayer() {
+        exoPlayer = ExoPlayerFactory.newSimpleInstance(
+            context,
+            DefaultRenderersFactory(context),
+            DefaultTrackSelector(), DefaultLoadControl()
+        )
+        exoPlayer?.playWhenReady = true
+        exoPlayer?.prepare(buildMediaSource(), false, true)
+        playerView.player = exoPlayer
     }
 
-    private fun buildMediaSource(uri: Uri): MediaSource =
+    override fun hidePlayer() {
+        playerView.visibility = View.GONE
+    }
+
+    override fun onDetachedFromWindow() {
+        stopPlayer()
+        super.onDetachedFromWindow()
+    }
+
+    override fun initializeViews() {
+        stepNumberShort.text = presenter.stepNumber
+        stepNumberLong.text = presenter.stepNumber
+        shortDescription.text = presenter.shortDescription
+        longDescription.text = presenter.description
+    }
+
+    private fun buildMediaSource(): MediaSource =
         ExtractorMediaSource.Factory(
             DefaultHttpDataSourceFactory(
                 Util.getUserAgent(
@@ -92,7 +95,7 @@ class StepView @JvmOverloads constructor(
                     context.resources.getString(R.string.app_name)
                 )
             )
-        ).createMediaSource(uri)
+        ).createMediaSource(presenter.videoUri)
 
     private fun stopPlayer() =
         exoPlayer?.let {
@@ -100,9 +103,4 @@ class StepView @JvmOverloads constructor(
             (exoPlayer as SimpleExoPlayer).release()
             exoPlayer = null
         }
-
-    override fun onDetachedFromWindow() {
-        stopPlayer()
-        super.onDetachedFromWindow()
-    }
 }
