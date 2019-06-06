@@ -14,7 +14,7 @@ class DescriptionAdapterDelegateManager {
         getDelegate(layoutId).onCreateViewHolder(viewGroup)
 
 
-    fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int, value: Any) {
+    fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, value: Any) {
         val layoutId = getViewType(value)
         getDelegate(layoutId).onBindViewHolder(viewHolder, value)
     }

@@ -16,7 +16,7 @@ class DescriptionAdapter :
         adapterDelegateManager.onCreateViewHolder(parent, viewType)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
-        adapterDelegateManager.onBindViewHolder(holder, position, getItem(position))
+        adapterDelegateManager.onBindViewHolder(holder, getItem(position))
 
     override fun getItemViewType(position: Int) = adapterDelegateManager.getViewType(getItem(position))
 

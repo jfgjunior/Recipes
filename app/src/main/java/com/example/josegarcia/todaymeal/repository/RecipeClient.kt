@@ -1,4 +1,4 @@
-package com.example.josegarcia.todaymeal.internet
+package com.example.josegarcia.todaymeal.repository
 
 import com.example.josegarcia.todaymeal.model.Recipe
 import io.reactivex.Observable

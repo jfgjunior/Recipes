@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.josegarcia.todaymeal.view_model.RecipeListViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -39,21 +46,27 @@
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:padding="8dp"
+        android:visibility="@{viewModel.getProgressBarVisibility}"
         app:layout_constraintEnd_toEndOf="@+id/recipe_list"
         app:layout_constraintStart_toStartOf="@+id/recipe_list"
         app:layout_constraintTop_toTopOf="@+id/recipe_list" />
 
     <TextView
         android:id="@+id/no_connection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center|start"
         android:text="@string/no_connection"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:visibility="gone"
+        android:textSize="16sp"
+        android:background="@drawable/transparent_black_background"
+        android:visibility="@{viewModel.connectionMessageVisibility}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
