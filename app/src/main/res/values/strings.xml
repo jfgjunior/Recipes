@@ -2,7 +2,7 @@
     <string name="app_name">TodayMeal</string>
     <string name="ingredients">Ingredients</string>
     <string name="steps">Steps</string>
-    <string name="no_connection">Looks like you are not connected 😞</string>
+    <string name="no_connection">No internet connection.\nData will automatically load when online</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="size">normal</string>

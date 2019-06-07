@@ -1,63 +1,63 @@
 package com.example.josegarcia.todaymeal.views
 
-import android.graphics.Point
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.adapter.DescriptionAdapter
-import com.example.josegarcia.todaymeal.helper.ImageCache
-import com.example.josegarcia.todaymeal.model.Recipe
-import kotlinx.android.synthetic.main.fragment_recipe_description.*
+import com.example.josegarcia.todaymeal.databinding.FragmentRecipeDescriptionBinding
+import com.example.josegarcia.todaymeal.view_model.RecipeDescriptionViewModel
+import kotlinx.android.synthetic.main.fragment_recipe_description.toolbar
 import kotlinx.android.synthetic.main.fragment_recipe_description.appbar as appBar
+import kotlinx.android.synthetic.main.fragment_recipe_description.collapsing_toolbar_layout as collapsingToolbarLayout
 import kotlinx.android.synthetic.main.fragment_recipe_description.recipe_description as recipeDescription
 import kotlinx.android.synthetic.main.fragment_recipe_description.recipe_image as recipeImage
 
 class RecipeDescriptionFragment : Fragment() {
 
+    private val viewModel: RecipeDescriptionViewModel by lazy {
+        ViewModelProviders.of(this).get(RecipeDescriptionViewModel::class.java).apply {
+            arguments?.let {
+                this.recipe = RecipeDescriptionFragmentArgs.fromBundle(it).recipe
+                requireActivity().windowManager.defaultDisplay.getSize(this.activitySize)
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View =
-        inflater.inflate(R.layout.fragment_recipe_description, container, false)
+    ): View {
+        val binding = DataBindingUtil.inflate<FragmentRecipeDescriptionBinding>(
+            inflater,
+            R.layout.fragment_recipe_description,
+            container,
+            false
+        )
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        return binding.root
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        collapsing_toolbar_layout.setupWithNavController(toolbar, findNavController())
-        arguments?.let {
-            val recipe = RecipeDescriptionFragmentArgs.fromBundle(it).recipe
-            populateLayout(recipe)
-            setUpActionBar(recipe.name)
-        }
-    }
-
-    private fun populateLayout(recipe: Recipe) {
-        val adapter = DescriptionAdapter()
-        adapter.submit(recipe.ingredients, recipe.steps)
-        recipeDescription.adapter = adapter
-    }
-
-    private fun setUpActionBar(title: String) {
-        setActionBarImage()
-        setToolbarSize()
+        collapsingToolbarLayout.setupWithNavController(toolbar, findNavController())
         work_arround_while_no_solution_is_provided()
+        populateLayout()
     }
 
-    private fun setActionBarImage() =
-        ImageCache.bitmap?.let { recipeImage.setImageBitmap(it) }
-            ?: recipeImage.setImageResource(R.drawable.cooking_table)
-
-    private fun setToolbarSize() {
-        val dimens = Point()
-        requireActivity().windowManager.defaultDisplay.getSize(dimens)
-        val lp = appBar.layoutParams as ViewGroup.LayoutParams
-        lp.height = dimens.y / 3
+    private fun populateLayout() {
+        val adapter = DescriptionAdapter()
+        adapter.submit(viewModel.ingredients, viewModel.steps)
+        recipeDescription.adapter = adapter
     }
 
     /* TODO
