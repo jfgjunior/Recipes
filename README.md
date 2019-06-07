@@ -1,10 +1,8 @@
 # Recipes
-- Application which displays recipes with ingredients and instructions. The Introduction can have a demo video or not.
+Application which displays a list of delicious recipes and techs you how to cook them by showing a list of ingredients and a list of steps. Not sure how to execute a step? No problem. By clicking on any step you can see a explanatory video about the step, or, in the worst case, a more detailed description.
 
-## Libraries used:
-- RxJava
-- Picasso
-- FlexBox
+<b>Architecture:</b> MVVM (on my fragments) and MVP (on my custom views)</br>
+<b>Main technologies:</b> [<i>Kotlin</i>](https://kotlinlang.org/), [Navigation Architecutre Components](https://developer.android.com/guide/navigation/navigation-getting-started), [Android Architecture Components](https://developer.android.com/topic/libraries/architecture), [Databinding](https://developer.android.com/topic/libraries/data-binding), [Retrofit](https://square.github.io/retrofit/), [Picasso](https://square.github.io/picasso/)
 
 ## Picutres
 ![recipe_home](https://user-images.githubusercontent.com/6085389/50024087-66521e80-ffc8-11e8-8211-60889e8a804a.png)
