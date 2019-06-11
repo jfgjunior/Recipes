@@ -6,8 +6,11 @@ import com.example.josegarcia.todaymeal.model.Recipe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.net.UnknownHostException
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Repository {
+@Singleton
+class Repository @Inject constructor() {
     private val recipesList = MutableLiveData<List<Recipe>>()
     private val downloading = MutableLiveData<Boolean>()
     private val connectionStatus = MutableLiveData<Boolean>()

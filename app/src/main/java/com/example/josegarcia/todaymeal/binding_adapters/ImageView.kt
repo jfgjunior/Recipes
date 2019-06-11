@@ -1,12 +1,9 @@
-package com.example.josegarcia.todaymeal.views
+package com.example.josegarcia.todaymeal.binding_adapters
 
-import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.example.josegarcia.todaymeal.R
-import com.google.android.material.appbar.AppBarLayout
 import com.squareup.picasso.Picasso
-
 
 @BindingAdapter("android:setImage")
 fun ImageView.setImage(url: String) {
@@ -17,10 +14,4 @@ fun ImageView.setImage(url: String) {
             .load(url)
             .into(this)
     }
-}
-
-@BindingAdapter("android:setCustomHeight")
-fun AppBarLayout.setCustomHeight(height: Int) {
-    val lp = this.layoutParams as ViewGroup.LayoutParams
-    lp.height = height
 }

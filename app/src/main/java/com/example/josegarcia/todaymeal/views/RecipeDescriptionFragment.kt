@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.adapter.DescriptionAdapter
 import com.example.josegarcia.todaymeal.databinding.FragmentRecipeDescriptionBinding
-import com.example.josegarcia.todaymeal.view_model.RecipeDescriptionViewModel
-import kotlinx.android.synthetic.main.fragment_recipe_description.toolbar
+import com.example.josegarcia.todaymeal.extensions.arrowIcon
+import com.example.josegarcia.todaymeal.extensions.inject
+import com.example.josegarcia.todaymeal.extensions.viewModel
+import kotlinx.android.synthetic.main.fragment_recipe_description.*
 import kotlinx.android.synthetic.main.fragment_recipe_description.appbar as appBar
 import kotlinx.android.synthetic.main.fragment_recipe_description.collapsing_toolbar_layout as collapsingToolbarLayout
 import kotlinx.android.synthetic.main.fragment_recipe_description.recipe_description as recipeDescription
@@ -21,13 +22,12 @@ import kotlinx.android.synthetic.main.fragment_recipe_description.recipe_image a
 
 class RecipeDescriptionFragment : Fragment() {
 
-    private val viewModel: RecipeDescriptionViewModel by lazy {
-        ViewModelProviders.of(this).get(RecipeDescriptionViewModel::class.java).apply {
-            arguments?.let {
-                this.recipe = RecipeDescriptionFragmentArgs.fromBundle(it).recipe
-                requireActivity().windowManager.defaultDisplay.getSize(this.activitySize)
-            }
-        }
+    private val viewModel by viewModel {
+        inject.recipeDescriptionViewModelFactory
+            .create(
+                RecipeDescriptionFragmentArgs.fromBundle(arguments!!)
+                    .recipe
+            )
     }
 
     override fun onCreateView(
@@ -50,7 +50,11 @@ class RecipeDescriptionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         collapsingToolbarLayout.setupWithNavController(toolbar, findNavController())
-        work_arround_while_no_solution_is_provided()
+        /* Fixme
+        * Discussion link: https://issuetracker.google.com/issues/121078028
+        * remove it when solution comes up
+        */
+        toolbar.arrowIcon = R.drawable.ic_arrow_back
         populateLayout()
     }
 
@@ -58,13 +62,5 @@ class RecipeDescriptionFragment : Fragment() {
         val adapter = DescriptionAdapter()
         adapter.submit(viewModel.ingredients, viewModel.steps)
         recipeDescription.adapter = adapter
-    }
-
-    /* TODO
-    * Discussion link: https://issuetracker.google.com/issues/121078028
-    * remove it when solution comes up
-    */
-    private fun work_arround_while_no_solution_is_provided() {
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
     }
 }

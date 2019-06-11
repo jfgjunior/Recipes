@@ -3,7 +3,8 @@ package com.example.josegarcia.todaymeal.custom_views
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.model.Ingredient
 
-class IngredientPresenter(private val view: IngredientContract.View): IngredientContract.Presenter {
+class IngredientPresenter(private val view: IngredientContract.View) :
+    IngredientContract.Presenter {
     private lateinit var ingredient: Ingredient
     override val name: String by lazy { ingredient.name }
     override val quantity: String by lazy { ingredient.quantity.toString() }

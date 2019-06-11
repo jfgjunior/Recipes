@@ -6,6 +6,9 @@
         <variable
             name="viewModel"
             type="com.example.josegarcia.todaymeal.view_model.RecipeDescriptionViewModel" />
+        <variable
+            name="height"
+            type="Integer" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -16,7 +19,7 @@
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:setCustomHeight="@{viewModel.height}"
+            android:setCustomHeight="@{viewModel.proportion}"
             android:fitsSystemWindows="true">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
