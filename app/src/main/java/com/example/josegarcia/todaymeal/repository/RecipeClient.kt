@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 object RecipeClient {
-    private const val URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/"
+    private const val URL = "https://api.jsonbin.io/b/"
     private val client = OkHttpClient.Builder().addInterceptor { chain ->
         chain.proceed(chain.request())
     }.build()
@@ -28,7 +28,7 @@ object RecipeClient {
         }
 
     internal interface RecipeFetcher {
-        @get:GET("baking.json")
+        @get:GET("5d013bc658196b429f52fa80")
         val recipes: Observable<List<Recipe>>
     }
 }

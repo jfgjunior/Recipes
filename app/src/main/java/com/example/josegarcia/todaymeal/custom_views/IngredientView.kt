@@ -1,9 +1,9 @@
 package com.example.josegarcia.todaymeal.custom_views
 
 import android.content.Context
-import androidx.cardview.widget.CardView
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import androidx.cardview.widget.CardView
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.model.Ingredient
 import kotlinx.android.synthetic.main.view_ingredient.view.quantity

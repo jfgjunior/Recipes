@@ -1,7 +1,6 @@
 package com.example.josegarcia.todaymeal.custom_views
 
 import android.content.Context
-import android.net.Uri
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View

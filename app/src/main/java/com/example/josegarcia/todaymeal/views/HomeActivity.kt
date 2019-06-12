@@ -6,7 +6,6 @@ import androidx.navigation.findNavController
 import com.example.josegarcia.todaymeal.R
 
 class HomeActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
