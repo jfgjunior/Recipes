@@ -15,15 +15,13 @@ import com.example.josegarcia.todaymeal.databinding.FragmentRecipeListBinding
 import com.example.josegarcia.todaymeal.extensions.inject
 import com.example.josegarcia.todaymeal.extensions.viewModel
 import kotlinx.android.synthetic.main.fragment_recipe_list.*
-import kotlinx.android.synthetic.main.fragment_recipe_list.no_connection as noConnectionMessage
-import kotlinx.android.synthetic.main.fragment_recipe_list.progress_bar as progressBar
 import kotlinx.android.synthetic.main.fragment_recipe_list.recipe_list as recyclerView
 
 class RecipeListFragment : Fragment() {
 
     private val viewModel by viewModel {
         inject.recipeListViewModelFactory
-            .create(inject.repository)
+            .create(inject.recipeRepository)
     }
 
     override fun onCreateView(
