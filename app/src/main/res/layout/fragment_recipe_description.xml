@@ -6,9 +6,6 @@
         <variable
             name="viewModel"
             type="com.example.josegarcia.todaymeal.view_model.RecipeDescriptionViewModel" />
-        <variable
-            name="height"
-            type="Integer" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
