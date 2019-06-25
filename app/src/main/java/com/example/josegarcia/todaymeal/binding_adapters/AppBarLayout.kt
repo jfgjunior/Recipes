@@ -6,7 +6,7 @@ import com.google.android.material.appbar.AppBarLayout
 
 @BindingAdapter("android:setCustomHeight")
 fun AppBarLayout.setCustomHeight(proportion: Int) {
-    val height = rootView.measuredHeight / proportion
+    val height = context.resources.displayMetrics.heightPixels / proportion
     val lp = this.layoutParams as ViewGroup.LayoutParams
     lp.height = height
 }

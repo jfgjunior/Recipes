@@ -10,15 +10,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.adapter.DescriptionAdapter
+import com.example.josegarcia.todaymeal.binding_adapters.setCustomHeight
 import com.example.josegarcia.todaymeal.databinding.FragmentRecipeDescriptionBinding
 import com.example.josegarcia.todaymeal.extensions.arrowIcon
 import com.example.josegarcia.todaymeal.extensions.inject
 import com.example.josegarcia.todaymeal.extensions.viewModel
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import kotlinx.android.synthetic.main.fragment_recipe_description.*
 import kotlinx.android.synthetic.main.fragment_recipe_description.appbar as appBar
 import kotlinx.android.synthetic.main.fragment_recipe_description.collapsing_toolbar_layout as collapsingToolbarLayout
 import kotlinx.android.synthetic.main.fragment_recipe_description.recipe_description as recipeDescription
-import kotlinx.android.synthetic.main.fragment_recipe_description.recipe_image as recipeImage
 
 class RecipeDescriptionFragment : Fragment() {
 
@@ -55,6 +58,7 @@ class RecipeDescriptionFragment : Fragment() {
         * remove it when solution comes up
         */
         toolbar.arrowIcon = R.drawable.ic_arrow_back
+        setUpRecyclerView()
         populateLayout()
     }
 
@@ -62,5 +66,12 @@ class RecipeDescriptionFragment : Fragment() {
         val adapter = DescriptionAdapter()
         adapter.submit(viewModel.ingredients, viewModel.steps)
         recipeDescription.adapter = adapter
+    }
+
+    private fun setUpRecyclerView() {
+        val layoutManager = FlexboxLayoutManager(context)
+        layoutManager.flexDirection = FlexDirection.ROW
+        layoutManager.justifyContent = JustifyContent.FLEX_START
+        recipeDescription.layoutManager = layoutManager
     }
 }
