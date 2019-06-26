@@ -7,4 +7,5 @@
     <color name="yellow">#d7a500</color>
     <color name="light_grey">#dedede</color>
     <color name="transparentBlack">#51000000</color>
+    <color name="colorText">#363636</color>
 </resources>

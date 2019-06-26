@@ -12,6 +12,7 @@ fun ImageView.setImage(url: String) {
     } else {
         Picasso.get()
             .load(url)
+            .error(R.drawable.cooking_table)
             .into(this)
     }
 }
