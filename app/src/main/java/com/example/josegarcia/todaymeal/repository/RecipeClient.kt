@@ -28,7 +28,7 @@ object RecipeClient {
         }
 
     internal interface RecipeFetcher {
-        @get:GET("5d013bc658196b429f52fa80/1")
+        @get:GET("5d013bc658196b429f52fa80/7")
         val recipes: Observable<List<Recipe>>
     }
 }

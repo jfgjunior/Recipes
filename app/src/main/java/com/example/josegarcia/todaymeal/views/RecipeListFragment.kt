@@ -14,7 +14,13 @@ import com.example.josegarcia.todaymeal.adapter.RecipeListAdapter
 import com.example.josegarcia.todaymeal.databinding.FragmentRecipeListBinding
 import com.example.josegarcia.todaymeal.extensions.inject
 import com.example.josegarcia.todaymeal.extensions.viewModel
+import com.google.android.flexbox.AlignContent
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
+import kotlinx.android.synthetic.main.fragment_recipe_description.*
 import kotlinx.android.synthetic.main.fragment_recipe_list.*
+import kotlinx.android.synthetic.main.fragment_recipe_list.toolbar
 import kotlinx.android.synthetic.main.fragment_recipe_list.no_connection as noConnectionMessage
 import kotlinx.android.synthetic.main.fragment_recipe_list.progress_bar as progressBar
 import kotlinx.android.synthetic.main.fragment_recipe_list.recipe_list as recyclerView
@@ -46,10 +52,18 @@ class RecipeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolbar.setupWithNavController(findNavController())
+        setUpRecyclerView()
         recyclerView.adapter = RecipeListAdapter()
         viewModel.recipes
             .observe(this, Observer { recipes ->
                 (recyclerView.adapter as RecipeListAdapter).submitList(recipes)
             })
+    }
+
+    private fun setUpRecyclerView() {
+        val layoutManager = FlexboxLayoutManager(context)
+        layoutManager.flexDirection = FlexDirection.ROW
+        layoutManager.justifyContent = JustifyContent.SPACE_BETWEEN
+        recyclerView.layoutManager = layoutManager
     }
 }

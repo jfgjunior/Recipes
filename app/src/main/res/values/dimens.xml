@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="recipe_list_height">128dp</dimen>
+    <dimen name="recipe_list_width">188dp</dimen>
 
     <!--
 Refer to App Widget Documentation for margin information

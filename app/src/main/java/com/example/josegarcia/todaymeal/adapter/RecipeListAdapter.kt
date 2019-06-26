@@ -10,15 +10,18 @@ import com.example.josegarcia.todaymeal.R
 import com.example.josegarcia.todaymeal.model.Recipe
 import com.example.josegarcia.todaymeal.views.RecipeListFragmentDirections
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.recipe_card.view.recipe_image as recipeImage
-import kotlinx.android.synthetic.main.recipe_card.view.recipe_name as recipeName
+import kotlinx.android.synthetic.main.item_recipe.view.recipe_score as recipeScore
+import kotlinx.android.synthetic.main.recipe_servings.view.recipe_servings as recipeServings
+import java.util.*
+import kotlinx.android.synthetic.main.item_recipe.view.recipe_image as recipeImage
+import kotlinx.android.synthetic.main.item_recipe.view.recipe_name as recipeName
 
 class RecipeListAdapter :
     ListAdapter<Recipe, RecipeListAdapter.RecipeViewHolder>(RecipeDifferCallback()) {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): RecipeViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.recipe_card, viewGroup, false)
+            .inflate(R.layout.item_recipe, viewGroup, false)
         return RecipeViewHolder(view)
     }
 
@@ -32,6 +35,8 @@ class RecipeListAdapter :
             loadImage(recipe)
             setClickListener(recipe)
             itemView.recipeName.text = recipe.name
+            itemView.recipeScore.score = recipe.score
+            itemView.recipeServings.text = String.format(Locale.US, "%d", recipe.servings)
         }
 
         private fun loadImage(recipe: Recipe) {
