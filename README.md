@@ -6,7 +6,9 @@ Application which displays a list of delicious recipes and techs you how to cook
 <b>Architecture:</b> MVVM (on my fragments) and MVP (on my custom views)
 
 ## Picutres
-![recipe_home](https://user-images.githubusercontent.com/6085389/50024087-66521e80-ffc8-11e8-8211-60889e8a804a.png)
-![recipe_details1](https://user-images.githubusercontent.com/6085389/50024080-65b98800-ffc8-11e8-9334-43d7d22dbe85.png)
-![recipe_details2](https://user-images.githubusercontent.com/6085389/50024082-65b98800-ffc8-11e8-84e7-f691d78d6399.png)
-![recipe_details3](https://user-images.githubusercontent.com/6085389/50024083-65b98800-ffc8-11e8-8163-3c18179f5d84.png)
+![image1](https://user-images.githubusercontent.com/6085389/60217302-cd3b7480-9842-11e9-9e30-305d7bfa525f.png)
+![image2](https://user-images.githubusercontent.com/6085389/60217303-ce6ca180-9842-11e9-9960-a652eb0f35b8.png) </br>
+![image3](https://user-images.githubusercontent.com/6085389/60217305-cf053800-9842-11e9-9ce3-ff286370eeba.png)
+![image4](https://user-images.githubusercontent.com/6085389/60217309-d0366500-9842-11e9-97b0-7922e09a8ae9.png) </br>
+![image5](https://user-images.githubusercontent.com/6085389/60217311-d0cefb80-9842-11e9-88a1-682628af7301.png)
+![image6](https://user-images.githubusercontent.com/6085389/60217314-d1679200-9842-11e9-82d6-edcb891dbb1b.png)
