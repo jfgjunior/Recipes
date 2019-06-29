@@ -1,5 +1,5 @@
 # Recipes
-Application which displays a list of delicious recipes and techs you how to cook them by showing a list of ingredients and a list of steps. Not sure how to execute a step? No problem. By clicking on any step you can see a explanatory video about the step, or, in the worst case, a more detailed description.
+Application which displays a list of delicious recipes and teaches you how to cook them by showing a list of ingredients and a list of steps. Not sure how to execute a step? No problem. By clicking on any step you can see a explanatory video about the step, or, in the worst case, a more detailed description.
 
 ## Technical details
 <b><u>Main technologies:</u></b> [<i>Kotlin</i>](https://kotlinlang.org/), [Navigation Architecutre Components](https://developer.android.com/guide/navigation/navigation-getting-started), [Android Architecture Components](https://developer.android.com/topic/libraries/architecture), [Databinding](https://developer.android.com/topic/libraries/data-binding), [Retrofit](https://square.github.io/retrofit/), [Picasso](https://square.github.io/picasso/)</br>
